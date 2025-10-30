@@ -1,0 +1,590 @@
+{
+  "start_time": "2025-09-30T21:24:35.486765534Z",
+  "end_time": "2025-09-30T21:44:35.589126722Z",
+  "config": {
+    "rpc_urls": [
+      "https://devnet3.devcore4.com/rpc/Wodfmz39202MSKfpwmsdlzEowOplwkdL"
+    ],
+    "root_private_keys": [
+      "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
+      "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d",
+      "0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a",
+      "0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6",
+      "0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a",
+      "0x8b3a350cf5c34c9194ca85829a2df0ec3153be0318b5e2d3348e872092edffba"
+    ],
+    "workload_groups": [
+      {
+        "runtime_minutes": 20.0,
+        "name": "native base",
+        "traffic_gens": [
+          {
+            "tps": 10000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "native"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      },
+      {
+        "runtime_minutes": 20.0,
+        "name": "native + erc20",
+        "traffic_gens": [
+          {
+            "tps": 5000,
+            "recipient_seed": 10101,
+            "sender_seed": 1,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "native"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          },
+          {
+            "tps": 5000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "erc20"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      },
+      {
+        "runtime_minutes": 10.0,
+        "name": "erc20 + reward system spam",
+        "traffic_gens": [
+          {
+            "tps": 4000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "erc20"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          },
+          {
+            "tps": 200,
+            "recipient_seed": 10101,
+            "sender_seed": 1,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "system_spam": {
+                "call_type": "reward"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      },
+      {
+        "runtime_minutes": 10.0,
+        "name": "erc20 + snapshot system spam",
+        "traffic_gens": [
+          {
+            "tps": 4000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "erc20"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          },
+          {
+            "tps": 200,
+            "recipient_seed": 10101,
+            "sender_seed": 1,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "system_spam": {
+                "call_type": "snapshot"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      },
+      {
+        "runtime_minutes": 10.0,
+        "name": "erc20 + epoch_change system spam",
+        "traffic_gens": [
+          {
+            "tps": 4000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "erc20"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          },
+          {
+            "tps": 200,
+            "recipient_seed": 10101,
+            "sender_seed": 1,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "system_spam": {
+                "call_type": "epoch_change"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      },
+      {
+        "runtime_minutes": 10.0,
+        "name": "erc20 + system key normal",
+        "traffic_gens": [
+          {
+            "tps": 4000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "erc20"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          },
+          {
+            "tps": 200,
+            "recipient_seed": 10101,
+            "sender_seed": 1,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": "system_key_normal",
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      },
+      {
+        "runtime_minutes": 10.0,
+        "name": "eip7702 - create",
+        "traffic_gens": [
+          {
+            "tps": 4000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "erc20"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          },
+          {
+            "tps": 200,
+            "recipient_seed": 10101,
+            "sender_seed": 1,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "eip7702_create": {
+                "authorizations_per_tx": 1
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      },
+      {
+        "runtime_minutes": 10.0,
+        "name": "eip7702 - reuse",
+        "traffic_gens": [
+          {
+            "tps": 4000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "erc20"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          },
+          {
+            "tps": 200,
+            "recipient_seed": 10101,
+            "sender_seed": 1,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "eip7702_reuse": {
+                "total_authorizations": 5,
+                "authorizations_per_tx": 1
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      },
+      {
+        "runtime_minutes": 10.0,
+        "name": "Reserve balance",
+        "traffic_gens": [
+          {
+            "tps": 4000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "erc20"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          },
+          {
+            "tps": 200,
+            "recipient_seed": 10101,
+            "sender_seed": 1,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": "reserve_balance",
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      },
+      {
+        "runtime_minutes": 10.0,
+        "name": "Reserve balance",
+        "traffic_gens": [
+          {
+            "tps": 4000,
+            "recipient_seed": 10101,
+            "sender_seed": 2,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "few_to_many": {
+                "tx_type": "erc20"
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          },
+          {
+            "tps": 200,
+            "recipient_seed": 10101,
+            "sender_seed": 1,
+            "recipients": 100000,
+            "senders": null,
+            "erc20_balance_of": false,
+            "gen_mode": {
+              "reserve_balance_fail": {
+                "num_fail_txs": 5
+              }
+            },
+            "sender_group_size": null,
+            "tx_per_sender": null
+          }
+        ]
+      }
+    ],
+    "refresh_delay_secs": 5.0,
+    "use_receipts": false,
+    "use_receipts_by_block": false,
+    "use_get_logs": false,
+    "chain_id": 20143,
+    "min_native_amount": "100_000_000_000_000_000_000",
+    "seed_native_amount": "1_000_000_000_000_000_000_000",
+    "debug_log_file": false,
+    "trace_log_file": false,
+    "use_static_tps_interval": false,
+    "otel_endpoint": null,
+    "otel_replica_name": "default",
+    "report_dir": "/reports"
+  },
+  "workload_idx": 1,
+  "txs_sent": 13021013,
+  "txs_committed": 0,
+  "txs_dropped": 13021013,
+  "target_tps": 5000,
+  "stats": {
+    "monad_state_consensus_events_local_timeout": {
+      "counter": "monad_state_consensus_events_local_timeout",
+      "start": "2025-09-30T21:24:35.486765534Z",
+      "end": "2025-09-30T21:44:35.589126722Z",
+      "step": "15s",
+      "overall": {
+        "mean": 0.17494544611252943,
+        "variance": 0.0017780454018925113,
+        "p25": 0.1454386794167909,
+        "p50": 0.18179834927098862,
+        "p90": 0.22015924852309834,
+        "p99": 0.27269752390648294,
+        "samples": 81
+      },
+      "quarters": [
+        {
+          "mean": 0.1922306843445627,
+          "variance": 0.001640979937176358,
+          "p25": 0.16361851434388974,
+          "p50": 0.18179834927098862,
+          "p90": 0.2363378540522852,
+          "p99": 0.27269752390648294,
+          "samples": 81
+        },
+        {
+          "mean": 0.15766543946037814,
+          "variance": 0.001034489212554654,
+          "p25": 0.12842387216320836,
+          "p50": 0.16361553984038396,
+          "p90": 0.1999781841980875,
+          "p99": 0.21815801912518634,
+          "samples": 81
+        },
+        {
+          "mean": 0.16775746649860493,
+          "variance": 0.0016714904731626005,
+          "p25": 0.1284262283051407,
+          "p50": 0.18179834927098862,
+          "p90": 0.21815801912518634,
+          "p99": 0.2363335575472213,
+          "samples": 81
+        },
+        {
+          "mean": 0.18213041438947244,
+          "variance": 0.00206464948723821,
+          "p25": 0.16361851434388974,
+          "p50": 0.1999781841980875,
+          "p90": 0.2363378540522852,
+          "p99": 0.2545176889793841,
+          "samples": 81
+        }
+      ]
+    },
+    "monad_state_consensus_events_proposal_with_tc": {
+      "counter": "monad_state_consensus_events_proposal_with_tc",
+      "start": "2025-09-30T21:24:35.486765534Z",
+      "end": "2025-09-30T21:44:35.589126722Z",
+      "step": "15s",
+      "overall": {
+        "mean": 0.16342668342788955,
+        "variance": 0.0015079383460359919,
+        "p25": 0.12842387216320839,
+        "p50": 0.16361851434388974,
+        "p90": 0.2018126444795068,
+        "p99": 0.2522249846863402,
+        "samples": 81
+      },
+      "quarters": [
+        {
+          "mean": 0.17025249172912077,
+          "variance": 0.0012844024107474192,
+          "p25": 0.1454386794167909,
+          "p50": 0.16361851434388974,
+          "p90": 0.20180894197075605,
+          "p99": 0.2522249846863402,
+          "samples": 81
+        },
+        {
+          "mean": 0.1513606480239151,
+          "variance": 0.0010641570690334452,
+          "p25": 0.12725884448969205,
+          "p50": 0.1454386794167909,
+          "p90": 0.1999781841980875,
+          "p99": 0.21815801912518634,
+          "samples": 81
+        },
+        {
+          "mean": 0.15604196511014254,
+          "variance": 0.0012048924233282292,
+          "p25": 0.12725884448969205,
+          "p50": 0.16361851434388974,
+          "p90": 0.1999781841980875,
+          "p99": 0.2018126444795068,
+          "samples": 81
+        },
+        {
+          "mean": 0.17605574321548342,
+          "variance": 0.0020723259410626964,
+          "p25": 0.16361851434388974,
+          "p50": 0.1999745486938026,
+          "p90": 0.22015924852309834,
+          "p99": 0.23850585256668988,
+          "samples": 81
+        }
+      ]
+    },
+    "monad_state_consensus_events_creating_proposal": {
+      "counter": "monad_state_consensus_events_creating_proposal",
+      "start": "2025-09-30T21:24:35.486765534Z",
+      "end": "2025-09-30T21:44:35.589126722Z",
+      "step": "15s",
+      "overall": {
+        "mean": 0.2941800117083984,
+        "variance": 0.0006444952543753352,
+        "p25": 0.27269752390648294,
+        "p50": 0.2908773588335818,
+        "p90": 0.3272370286877795,
+        "p99": 0.36359669854197724,
+        "samples": 81
+      },
+      "quarters": [
+        {
+          "mean": 0.30085097156731677,
+          "variance": 0.0007639320475877204,
+          "p25": 0.2751940117783037,
+          "p50": 0.2908773588335818,
+          "p90": 0.3272370286877795,
+          "p99": 0.36359669854197724,
+          "samples": 81
+        },
+        {
+          "mean": 0.28385148468940946,
+          "variance": 0.0004669900745360167,
+          "p25": 0.27269752390648294,
+          "p50": 0.2908720708273493,
+          "p90": 0.31189226874105597,
+          "p99": 0.3272370286877795,
+          "samples": 81
+        },
+        {
+          "mean": 0.29489438349125946,
+          "variance": 0.00044420430863192917,
+          "p25": 0.27269752390648294,
+          "p50": 0.2908773588335818,
+          "p90": 0.3272370286877795,
+          "p99": 0.3272370286877795,
+          "samples": 81
+        },
+        {
+          "mean": 0.29712428019021275,
+          "variance": 0.0007425322267882034,
+          "p25": 0.27269752390648294,
+          "p50": 0.2908773588335818,
+          "p90": 0.3454168636148784,
+          "p99": 0.3454168636148784,
+          "samples": 81
+        }
+      ]
+    },
+    "monad_execution_ledger_num_tx_commits": {
+      "counter": "monad_execution_ledger_num_tx_commits",
+      "start": "2025-09-30T21:24:35.486765534Z",
+      "end": "2025-09-30T21:44:35.589126722Z",
+      "step": "15s",
+      "overall": {
+        "mean": 2.165654580659719,
+        "variance": 0.006481567491457341,
+        "p25": 2.108822513498282,
+        "p50": 2.1633610267784102,
+        "p90": 2.2879997117480677,
+        "p99": 2.3451560710455035,
+        "samples": 81
+      },
+      "quarters": [
+        {
+          "mean": 2.1341417656527573,
+          "variance": 0.0072673162899468124,
+          "p25": 2.0725011816892702,
+          "p50": 2.145181522351701,
+          "p90": 2.2178995400585384,
+          "p99": 2.345156071045503,
+          "samples": 81
+        },
+        {
+          "mean": 2.1937256292817158,
+          "variance": 0.003554735278938459,
+          "p25": 2.1633610267784102,
+          "p50": 2.199720035631829,
+          "p90": 2.2906175577653753,
+          "p99": 2.293325505448941,
+          "samples": 81
+        },
+        {
+          "mean": 2.1853214685049305,
+          "variance": 0.007156845506494314,
+          "p25": 2.108860851543468,
+          "p50": 2.1815405312051195,
+          "p90": 2.290617557765376,
+          "p99": 2.3451560710455035,
+          "samples": 81
+        },
+        {
+          "mean": 2.149424442867899,
+          "variance": 0.0055157789154982595,
+          "p25": 2.090681016616369,
+          "p50": 2.1270020179249913,
+          "p90": 2.2906592008144564,
+          "p99": 2.2906592008144564,
+          "samples": 81
+        }
+      ]
+    }
+  },
+  "stats_str": "\n=== Consensus Local Timeout Events (monad_state_consensus_events_local_timeout) [count] ===\nSamples: 81\nOverall: mean=0.174945, var=0.001778, p25=0.145439, p50=0.181798, p90=0.220159, p99=0.272698\nQuarters:\n  Quarter 1: mean=0.192, var=0.002, p50=0.182, p99=0.273\n  Quarter 2: mean=0.158, var=0.001, p50=0.164, p99=0.218\n  Quarter 3: mean=0.168, var=0.002, p50=0.182, p99=0.236\n  Quarter 4: mean=0.182, var=0.002, p50=0.200, p99=0.255\n\n=== Consensus Proposals with TC (monad_state_consensus_events_proposal_with_tc) [count] ===\nSamples: 81\nOverall: mean=0.163427, var=0.001508, p25=0.128424, p50=0.163619, p90=0.201813, p99=0.252225\nQuarters:\n  Quarter 1: mean=0.170, var=0.001, p50=0.164, p99=0.252\n  Quarter 2: mean=0.151, var=0.001, p50=0.145, p99=0.218\n  Quarter 3: mean=0.156, var=0.001, p50=0.164, p99=0.202\n  Quarter 4: mean=0.176, var=0.002, p50=0.200, p99=0.239\n\n=== Consensus Creating Proposal Events (monad_state_consensus_events_creating_proposal) [count] ===\nSamples: 81\nOverall: mean=0.294180, var=0.000644, p25=0.272698, p50=0.290877, p90=0.327237, p99=0.363597\nQuarters:\n  Quarter 1: mean=0.301, var=0.001, p50=0.291, p99=0.364\n  Quarter 2: mean=0.284, var=0.000, p50=0.291, p99=0.327\n  Quarter 3: mean=0.295, var=0.000, p50=0.291, p99=0.327\n  Quarter 4: mean=0.297, var=0.001, p50=0.291, p99=0.345\n\n=== Execution Ledger TX Commits (monad_execution_ledger_num_tx_commits) [ops/sec] ===\nSamples: 81\nOverall: mean=2.165655, var=0.006482, p25=2.108823, p50=2.163361, p90=2.288000, p99=2.345156\nQuarters:\n  Quarter 1: mean=2.134, var=0.007, p50=2.145, p99=2.345\n  Quarter 2: mean=2.194, var=0.004, p50=2.200, p99=2.293\n  Quarter 3: mean=2.185, var=0.007, p50=2.182, p99=2.345\n  Quarter 4: mean=2.149, var=0.006, p50=2.127, p99=2.291\n"
+}
