@@ -11,8 +11,12 @@ Quick start (basic venv)
 - Launch the app:
   `streamlit run examples/txdash/app.py`
 
+Views
+- **Overview:** recent runs table with filters, per-workload counts, and quick navigation into details.
+- **Run detail & compare:** pick a baseline run, match prior runs by workload name or exact workload-config hash, optionally fine-tune the set, and review deltas/flags.
+
 Notes
 - The app reads JSON reports produced by txgen (Report::to_json_file).
 - It operates purely offline: no live Prometheus queries.
 - Point it at the folder containing `*-report-*.json` files (default: `reports`).
-- Comparison focuses on runs from the same workload group for clarity.
+- Comparison defaults to workload-name matching; switch to hash mode for identical configs or use the advanced filter to tweak manually.
