@@ -4,9 +4,14 @@ import os
 import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Iterable, List, Optional
 
 import streamlit as st
+
+
+DEFAULT_REPORTS_DIR = "workload-reports"
+
+VersionBounds = Dict[str, Dict[str, datetime]]
 
 
 @dataclass
@@ -20,6 +25,7 @@ class RunRow:
     workload_config: Dict[str, Any]
     workload_config_hash: str
     gen_mode: str
+    client_version: str
     target_tps: int
     txs_sent: int
     txs_committed: int
@@ -109,6 +115,7 @@ def _derive_row(data: Dict[str, Any], file: str) -> Optional[RunRow]:
 
         stats = data.get("stats", {}) or {}
         stats_str = data.get("stats_str", "") or ""
+        client_version = data.get("client_version") or "Unknown"
 
         return RunRow(
             file=file,
@@ -120,6 +127,7 @@ def _derive_row(data: Dict[str, Any], file: str) -> Optional[RunRow]:
             workload_config=workload_config_copy,
             workload_config_hash=workload_hash,
             gen_mode=gen_mode,
+            client_version=client_version,
             target_tps=target_tps,
             txs_sent=txs_sent,
             txs_committed=txs_committed,
@@ -159,9 +167,32 @@ def load_reports(dir_path: str) -> List[RunRow]:
             except Exception as exc:
                 print(f"Error loading {path}: {exc}")
                 continue
-    rows.sort(key=lambda r: (r.workload_name, r.start), reverse=True)
+    rows.sort(key=lambda r: r.start, reverse=True)
     print(f"Loaded {len(rows)} reports")
     return rows
+
+
+def compute_version_bounds(rows: Iterable[RunRow]) -> VersionBounds:
+    bounds: VersionBounds = {}
+    for row in rows:
+        version = row.client_version or "Unknown"
+        start = row.start
+        entry = bounds.setdefault(version, {"earliest": start, "latest": start})
+        if start < entry["earliest"]:
+            entry["earliest"] = start
+        if start > entry["latest"]:
+            entry["latest"] = start
+    return bounds
+
+
+def format_version_label(version: str, bounds: VersionBounds) -> str:
+    entry = bounds.get(version)
+    if not entry:
+        return version
+    earliest = entry.get("earliest")
+    if not earliest:
+        return version
+    return f"{version} ({earliest.astimezone(timezone.utc).strftime('%Y-%m-%d')})"
 
 
 def format_duration(seconds: float) -> str:
@@ -172,4 +203,3 @@ def format_duration(seconds: float) -> str:
     if mins > 0:
         return f"{mins}m {secs}s"
     return f"{secs}s"
-
