@@ -124,7 +124,7 @@ def _version_summary_rows(
     return summary
 
 
-st.set_page_config(page_title="txgen reports overview", layout="wide")
+st.set_page_config(page_title="Txgen Reports Overview", layout="wide")
 _init_session_state()
 
 
@@ -145,12 +145,12 @@ rows = load_reports(reports_dir)
 version_bounds = compute_version_bounds(rows)
 
 if not rows:
-    st.title("txgen report explorer")
+    st.title("Txgen Report Explorer")
     st.info("No reports found. Update the reports folder in the sidebar and reload.")
     st.stop()
 
 
-st.title("txgen report explorer")
+st.title("Txgen Report Explorer")
 st.caption(f"Source folder: {os.path.abspath(reports_dir)}")
 
 total_runs = len(rows)

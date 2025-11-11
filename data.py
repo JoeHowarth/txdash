@@ -9,7 +9,7 @@ from typing import Any, Dict, Iterable, List, Optional
 import streamlit as st
 
 
-DEFAULT_REPORTS_DIR = "workload-reports"
+DEFAULT_REPORTS_DIR = "/home/monad/workload-reports"
 
 VersionBounds = Dict[str, Dict[str, datetime]]
 
